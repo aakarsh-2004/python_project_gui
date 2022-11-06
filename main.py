@@ -6,8 +6,12 @@ import mysql.connector
 
 root = Tk()
 
+root.title('Tourist Management System')
 root.configure(bg = '#9BE2C4')
 root.geometry("1255x944")
+p1 = PhotoImage(file = 'icon.png')
+root.iconphoto(False, p1)
+
 
 mycon = mysql.connector.connect(host = "localhost", user = "root", passwd = "toor", database = "touristmanagement",)
 c = mycon.cursor()
@@ -15,6 +19,11 @@ if mycon.is_connected():
     print("Connection successfully established!")
 else:
     print("Not Connected!")
+
+def show_less():
+    query_label.destroy()
+    btn.destroy()
+    
 def button():
     c.execute("SELECT * From TripInformation")
     records = c.fetchall()
@@ -22,8 +31,13 @@ def button():
     print_records = ''
     for record in records:
         print_records += str(record)+ "\n"
+    global query_label
     query_label = Label(root, text = print_records, padx = 10, pady = 10, font = ('Bahnschrift SemiBold Condensed', 14),bg = '#9BE2C4')            
     query_label.grid(row = '2', column = '3')
+    global btn
+    btn = Button(root, text = 'Show Less',font = ('Bahnschrift SemiBold Condensed', 15), command = show_less, padx = 10, pady = 10, bg = '#181818', fg = 'white')
+    btn.grid(row = '3', column = '3')
+    
 def test():
     inpt_pr = str(inpt.get())
     inpt_pr_1 = inpt_1.get()
@@ -55,6 +69,25 @@ def delete():
     value = (del_inp,)
     c.execute(query, value)
     mycon.commit()
+
+def clear():
+    morebtn_lbl.destroy()
+    morebtn_clear.destroy()
+
+def morebtn():
+    more_inpt = more_info.get()
+    print(more_inpt)
+    more_info.delete(0, END)
+    query = "select * from tripinformation where Places = %s"
+    value = (more_inpt,)
+    c.execute(query, value)
+    morebtn_data = c.fetchall()
+    global morebtn_lbl
+    morebtn_lbl = Label(root, text = morebtn_data,font = ('Bahnschrift SemiBold Condensed', 15), padx = 10, pady = 10, bg = '#9BE2C4', fg = 'black')
+    morebtn_lbl.grid(row = '7', column = '3')
+    global morebtn_clear
+    morebtn_clear = Button(root, text = 'Clear', command = clear, font = ('Bahnschrift SemiBold Condensed', 15), padx = 5, pady = 5, bg = '#181818', fg = 'white')
+    morebtn_clear.grid(row = '8', column = '3')
 
 
 inpt = Entry(root)
@@ -102,7 +135,7 @@ lbl_d = Label(root, text = 'Delete the data of a Place:', font = ('Bahnschrift S
 lbl_d.grid(row = '9', column = '2')
 
 inpt_del = Entry(root)
-
+inpt_del.insert(0, 'Place that you want to remove')
 inpt_del.grid(row = '10', column = '2', ipadx= 100, ipady = 8, padx = 5, pady = 5)
 #inpt_del.insert(0, 'Enter the place that you want to delete ')
 
@@ -114,5 +147,15 @@ del_inp = inpt_del.get()
 
 btn_del = Button(root, text = "DONE!",font = ('Bahnschrift SemiBold Condensed', 15), command = delete, padx = 10, pady = 10, bg = '#181818', fg = 'white')
 btn_del.grid(row = '11', column = '2', ipadx= 20, ipady = 6, padx = 5, pady = 5)
+
+head_lbl = Label(root, text = 'Search Database!',font = ('Bahnschrift SemiBold Condensed', 24), bg = '#9BE2C4' )
+head_lbl.grid(row = '4', column = '3')
+
+more_info = Entry(root)
+more_info.insert(0,'Enter what you want to search')
+more_info.grid(row = '5', column = '3', ipadx= 100, ipady = 8, padx = 10, pady = 10)
+
+more_btn = Button(root,text= "Search! ", command = morebtn,font = ('Bahnschrift SemiBold Condensed', 15), padx = 10, pady = 10, bg = '#181818', fg = 'white' )
+more_btn.grid(row = '6', column = '3')
 
 root.mainloop()
