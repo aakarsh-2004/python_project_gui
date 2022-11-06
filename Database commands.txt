@@ -1,0 +1,15 @@
+create database TouristManagement;
+ use TouristManagement;
+ create table TripInformation(Places varchar(30),Package integer,Hotels varchar(30),Numberofpeople integer,Tripduration varchar(30),Transportation varchar(30));
+ insert into TripInformation values('Bangkok',90000,'5star',4,'FivenightsFourdays','flightspicejet');
+ insert into TripInformation values('Hawaii',200000,'4star',4,'FivenightsFourdays','flightAirindia');
+ insert into TripInformation values('Italy',150000,'3star',4,'FivenightsFourdays','flightAirindia');
+ insert into TripInformation values('Goa',30000,'3star',4,'FivenightsFourdays','flightspicejet');
+insert into TripInformation values('bhutan',15000,'3star',4,'FivenightsFourdays','flightspicejet');
+ insert into TripInformation values('SriLanka',85000,'3star',4,'FivenightsFourdays','flightspicejet');
+insert into TripInformation values('SouthAfrica',200000,'4star',4,'FivenightsFourdays','flightAirindia');
+ insert into TripInformation values('Maldives',65000,'4star',4,'FivenightsFourdays','flightAirindia');
+ insert into TripInformation values('Manali',20000,'3star',4,'FivenightsFourdays','flightAirindia');
+ insert into TripInformation values('Kashmir',15000,'3star',4,'FivenightsFourdays','flightAirindia');
+select* from TripInformation;
+(Places, Package, Hotels, Numberofpeople,Tripduration, Transportation)
