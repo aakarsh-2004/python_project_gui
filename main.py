@@ -9,8 +9,8 @@ root = Tk()
 root.title('Tourist Management System')
 root.configure(bg = '#9BE2C4')
 root.geometry("1255x944")
-p1 = PhotoImage(file = 'icon.png')
-root.iconphoto(False, p1)
+# p1 = PhotoImage(file = 'icon.png')
+# root.iconphoto(False, p1)
 
 
 mycon = mysql.connector.connect(host = "localhost", user = "root", passwd = "toor", database = "touristmanagement",)
