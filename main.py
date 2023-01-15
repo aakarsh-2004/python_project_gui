@@ -13,8 +13,36 @@ root.geometry("1255x944")
 # root.iconphoto(False, p1)
 
 
-mycon = mysql.connector.connect(host = "localhost", user = "root", passwd = "toor", database = "touristmanagement",)
+mycon1 = mysql.connector.connect(host = "localhost", user = "root", passwd = "toor")
+
+c1 = mycon1.cursor()
+
+c1.execute("DROP DATABASE IF EXISTS touristmanagement")
+c1.execute("CREATE DATABASE touristmanagement;")
+c1.execute("USE touristmanagement")
+c1.execute("create table TripInformation(Places varchar(30),Package integer,Hotels varchar(30),Numberofpeople integer,Tripduration varchar(30),Transportation varchar(30));")
+c1.execute("insert into TripInformation values('Bangkok',90000,'5star',4,'FivenightsFourdays','flightspicejet');")
+c1.execute("insert into TripInformation values('Hawaii',200000,'4star',4,'FivenightsFourdays','flightAirindia');")
+c1.execute("insert into TripInformation values('Italy',150000,'3star',4,'FivenightsFourdays','flightAirindia');")
+c1.execute("insert into TripInformation values('Goa',30000,'3star',4,'FivenightsFourdays','flightspicejet');")
+c1.execute("insert into TripInformation values('bhutan',15000,'3star',4,'FivenightsFourdays','flightspicejet');")
+c1.execute("insert into TripInformation values('SriLanka',85000,'3star',4,'FivenightsFourdays','flightspicejet');")
+c1.execute("insert into TripInformation values('SouthAfrica',200000,'4star',4,'FivenightsFourdays','flightAirindia');")
+c1.execute("insert into TripInformation values('Maldives',65000,'4star',4,'FivenightsFourdays','flightAirindia');")
+c1.execute("insert into TripInformation values('Manali',20000,'3star',4,'FivenightsFourdays','flightAirindia');")
+c1.execute("insert into TripInformation values('Kashmir',15000,'3star',4,'FivenightsFourdays','flightAirindia');")
+
+
+mycon1.commit()
+
+
+
+mycon = mysql.connector.connect(host = "localhost", user = "root", passwd = "toor", database = "touristmanagement")
+
 c = mycon.cursor()
+
+
+
 if mycon.is_connected():
     print("Connection successfully established!")
 else:
